@@ -66,7 +66,7 @@ reCaptcha:
 atom_feed:
   path                   : # blank (default) uses feed.xml
 search                   : true # true, false (default)
-search_full_content      : # true, false (default)
+search_full_content      : true # true, false (default)
 search_provider          : lunr # lunr (default), algolia, google
 algolia:
   application_id         : # 8BSFGKB8J5 # YOUR_APPLICATION_ID
@@ -137,7 +137,7 @@ footer:
       url: "https://twitter.com/li_thal1"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://lisamr.github.io"
+      url: "https://github.com/lisamr"
 
 
 # Reading Files
