@@ -5,7 +5,13 @@ permalink: /CV/
 
 header:
   overlay_filter: .2
-  overlay_image: /images/me_in_gap.jpg
+  overlay_image: /images/halfdome_pano.jpg
+  caption: "The view for all 15 pitches of Crest Jewel, 2018."
+excerpt: >
+  <br />
+  <br />
+  <br />
+  <br /> 
 ---
 
 You can find my CV right [here](https://drive.google.com/file/d/128W-y_UX2MSdIPB43dlzQcJqU1kKwtjD/view?usp=sharing).
