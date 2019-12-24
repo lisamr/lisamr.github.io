@@ -6,7 +6,7 @@ permalink: /CV/
 header:
   overlay_filter: .2
   overlay_image: /images/halfdome_pano.jpg
-  caption: "The view for all 15 pitches of Crest Jewel, 2018."
+  caption: "The view from all 15 pitches of Crest Jewel, 2018."
 excerpt: >
   <br />
   <br />

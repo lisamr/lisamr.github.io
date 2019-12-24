@@ -15,7 +15,7 @@ feature_row:
   - image_path: /images/dampingoff_detail.jpg
     alt: "Damping off seedlings"
     title: "My Research"
-    excerpt: "Details about how I'm testing *how* diversity actually affects disease risk."
+    excerpt: "Details about how I'm testing *how* diversity actually affects disease risk. Plus some extra work on long-term forest disturbances in the sierras."
     url: "/research/"
     btn_class: "btn--primary"
     btn_label: "Learn more"
