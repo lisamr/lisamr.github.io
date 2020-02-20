@@ -5,16 +5,16 @@ layout: single
 classes: wide
 entries_layout: grid
 header:
-  teaser: images/mesocosm/spread_map_still.jpg
+  teaser: images/mesocosm/trays_singlespp.JPG
 gallery:
-  - url: images/mesocosm/sowing_seeds.jpg
-    image_path: images/mesocosm/sowing_seeds.jpg
+  - url: images/mesocosm/sowing_seeds.JPG
+    image_path: images/mesocosm/sowing_seeds.JPG
     alt: "Sowing seeds using a 3D printed hexagonal grid"
-  - url: images/mesocosm/tat1.jpg
-    image_path: images/mesocosm/tat1.jpg
+  - url: images/mesocosm/tat1.JPG
+    image_path: images/mesocosm/tat1.JPG
     alt: "Rhizoctonia inoculum"
-  - url: images/mesocosm/mustardsymptoms.jpg
-    image_path: images/mesocosm/mustardsymptoms.jpg
+  - url: images/mesocosm/mustardsymptoms.JPG
+    image_path: images/mesocosm/mustardsymptoms.JPG
     alt: "Damping off symptoms in mustard"
 ---
 
