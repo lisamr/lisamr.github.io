@@ -5,7 +5,7 @@ layout: single
 classes: wide
 entries_layout: grid
 header:
-  teaser: images/mesocosm/trays_singlespp.jpg
+  teaser: images/mesocosm/spread_map_still.jpg
 gallery:
   - url: images/mesocosm/sowing_seeds.jpg
     image_path: images/mesocosm/sowing_seeds.jpg
