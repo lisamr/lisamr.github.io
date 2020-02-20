@@ -1,59 +1,17 @@
 ---
-permalink: /about/
 title: "About"
-excerpt: "Minimal Mistakes is a flexible two-column Jekyll theme."
-layouts_gallery:
-  - url: /assets/images/mm-layout-splash.png
-    image_path: /assets/images/mm-layout-splash.png
-    alt: "splash layout example"
-  - url: /assets/images/mm-layout-single-meta.png
-    image_path: /assets/images/mm-layout-single-meta.png
-    alt: "single layout with comments and related posts"
-  - url: /assets/images/mm-layout-archive.png
-    image_path: /assets/images/mm-layout-archive.png
-    alt: "archive layout example"
-last_modified_at: 2019-08-27T15:46:43-04:00
-toc: true
-author_profile: true
+layout: single
+classes: wide
+permalink: /about/
+sidebar:
+  - title: #"Title"
+    image: /images/selfie_JT.jpg
 ---
 
-Minimal Mistakes is a flexible two-column Jekyll theme. Perfect for hosting your personal site, blog, or portfolio on GitHub or self-hosting on your own server. As the name implies --- styling is purposely minimalistic to be enhanced and customized by you :smile:.
+Welcome to my site! My hope is that over time I can house my musings about work, disease ecology, as well as my work-life balance. I am a PhD candidate studying plant disease ecology at UC Davis. I first became interested in fungi during my undergraduate at UC Berkeley when I took a class on "Fire, Insects, and Disease". Once I took [Tom Bruns'](https://nature.berkeley.edu/brunslab/) class "CA mushrooms", it was a slippery slope into the world of fungi.  
 
-{% include gallery id="layouts_gallery" caption="Examples of included layouts `splash`, `single`, and `archive`." %}
+After undergrad, I bounced around field and lab technician jobs in Berkeley, Costa Rica, and Western Massachusetts. I worked as a lab hand in [Michael Hood's lab](https://www.amherst.edu/people/facstaff/mhood) at Amherst College and developed a deeper understanding and appreciation for disease ecology. I was able to do fieldwork in the Italian alps, hone in on my culturing skills, develop research questions and experiments, and play with plants in the greenhouse in the middle of winter.  
 
-[Install the Theme]({{ "/docs/quick-start-guide/" | relative_url }}){: .btn .btn--success .btn--large}
+I'm now in the [Rizzo Lab](https://ucanr.edu/sites/rizzolab/) at UC Davis where I mainly study the underlying mechanisms driving the relationship between host diversity and disease risk. I use a varied set of systems and approaches to understand the diversity-disease relationship including greenhouse mesocosms, individual-based simulations, and our lab's rich network of sudden oak death plot data from the Big Sur region. I am also interested in forest disturbances in the sierra nevada and had the opportunity to resurvey canopy gaps in Yosemite Valley.   
 
-## Notable Features
-
-- Bundled as a "theme gem" for easier install/upgrading.
-- Compatible with GitHub Pages.
-- Support for Jekyll's built-in Sass/SCSS preprocessor.
-- Nine different skins (color variations).
-- Several responsive layout options (single, archive index, search, splash, and paginated home page).
-- Optimized for search engines with support for [Twitter Cards](https://dev.twitter.com/cards/overview) and [Open Graph](http://ogp.me/) data
-
----
-
-## Credits
-
-### Icons + Demo Images:
-
-- [The Noun Project](https://thenounproject.com) -- Garrett Knoll, Arthur Shlain, and [tracy tam](https://thenounproject.com/tracytam)
-- [Font Awesome](http://fontawesome.io/)
-- [Unsplash](https://unsplash.com/)
-
-### Other:
-
-- [Jekyll](https://jekyllrb.com/)
-- [jQuery](https://jquery.com/)
-- [Susy](http://susy.oddbird.net/)
-- [Breakpoint](http://breakpoint-sass.com/)
-- [Magnific Popup](http://dimsemenov.com/plugins/magnific-popup/)
-- [FitVids.JS](http://fitvidsjs.com/)
-- Greedy Navigation - [lukejacksonn](https://codepen.io/lukejacksonn/pen/PwmwWV)
-- [jQuery Smooth Scroll](https://github.com/kswedberg/jquery-smooth-scroll)
-- [Lunr](http://lunrjs.com)
-
----
-
-Minimal Mistakes is designed, developed, and maintained by Michael Rose. Just another boring, tattooed, designer from Buffalo New York.
+In my free time, you can find me climbing rocks, petting my cats, or mushroom hunting.  

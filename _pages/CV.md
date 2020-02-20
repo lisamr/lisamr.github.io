@@ -14,6 +14,6 @@ excerpt: >
   <br /> 
 ---
 
-You can find my CV right [here](https://drive.google.com/file/d/128W-y_UX2MSdIPB43dlzQcJqU1kKwtjD/view?usp=sharing).
+You can find my CV right [here](https://drive.google.com/file/d/1CSp9xx7-BEZHvD9amNt90uhFtcMyPaGR/view?usp=sharing).
 
 For an up-to-date list of publications, see my [Google Scholar page](https://scholar.google.com/citations?user=-TWrtU8AAAAJ&hl=en).

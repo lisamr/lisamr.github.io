@@ -65,8 +65,8 @@ reCaptcha:
   secret                 :
 atom_feed:
   path                   : # blank (default) uses feed.xml
-search                   : true # true, false (default)
-search_full_content      : true # true, false (default)
+search                   : false # true, false (default)
+search_full_content      : false # true, false (default)
 search_provider          : lunr # lunr (default), algolia, google
 algolia:
   application_id         : # 8BSFGKB8J5 # YOUR_APPLICATION_ID
@@ -132,12 +132,15 @@ author:
 # Site Footer
 footer:
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/li_thal1"
+    - label: #"Twitter"
+      icon: #"fab fa-fw fa-twitter-square"
+      url: #"https://twitter.com/li_thal1"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/lisamr"
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: mailto:lrosenthal@ucdavis.edu
 
 
 # Reading Files
@@ -265,10 +268,10 @@ compress_html:
 
 #configuring collections
 collections:
-  research:
+  funstuff:
     output: true
     permalink: /:collection/:path/
-  fun_stuff:
+  research:
     output: true
     permalink: /:collection/:path/
     
@@ -293,18 +296,10 @@ defaults:
       layout: single
       read_time: false
       comments: # true
-  # _research
+  # _portfolio
   - scope:
       path: ""
-      type: research
-    values:
-      layout: single
-      author_profile: false
-      share: true
-  # _fun_stuff
-  - scope:
-      path: ""
-      type: fun_stuff
+      type: portfolio
     values:
       layout: single
       author_profile: false
