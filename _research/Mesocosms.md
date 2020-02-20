@@ -22,6 +22,5 @@ The path towards fully understanding the relationship between host diversity and
 
 Starting in March 2020, I will simulate community disassembly by creating a series of nested artificial plant communities to empirically test how changes in species composition impact the spread of a fungal plant pathogen. I will be using greenhouse mesocosms consisting of crop seedlings contained in mesocosms inoculated with the soilborne pathogen, *Rhizoctonia solani*. My primary goal is to examine how changes in host competency and density across a richness gradient affects disease. I also will predict infection probability as a function of a community’s average host competency, density, and richness to estimate the relative effects of species composition and richness per se.  
 
-
 {% include gallery caption="Here is how I sow, inoculate and monitor my plants." %}
 
