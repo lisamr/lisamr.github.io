@@ -8,7 +8,7 @@ sidebar:
     image: /images/selfie_JT.jpg
 ---
 
-Welcome to my site! My hope is that over time I can house my musings about work, disease ecology, as well as my work-life balance. I am a PhD candidate studying plant disease ecology at UC Davis. I first became interested in fungi during my undergraduate at UC Berkeley when I took a class on "Fire, Insects, and Disease". Once I took [Tom Bruns'](https://nature.berkeley.edu/brunslab/) class "CA mushrooms", it was a slippery slope into the world of fungi.  
+Welcome! I am a PhD candidate studying plant disease ecology at UC Davis. I first became interested in fungi during my undergraduate at UC Berkeley when I took a class on "Fire, Insects, and Disease". Once I took [Tom Bruns'](https://nature.berkeley.edu/brunslab/) class "CA mushrooms", it was a slippery slope into the world of fungi.  
 
 After undergrad, I bounced around field and lab technician jobs in Berkeley, Costa Rica, and Western Massachusetts. I worked as a lab hand in [Michael Hood's lab](https://www.amherst.edu/people/facstaff/mhood) at Amherst College and developed a deeper understanding and appreciation for disease ecology. I was able to do fieldwork in the Italian alps, hone in on my culturing skills, develop research questions and experiments, and play with plants in the greenhouse in the middle of winter.  
 

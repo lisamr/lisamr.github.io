@@ -28,12 +28,26 @@ gallery2:
   - url: images/cricket.jpg
     image_path: images/cricket.jpg
     title: "Cricket"
+gallery3:
+  - url: images/corey_boletes.jpg
+    image_path: images/corey_boletes.jpg
+    title: "Corey with big boletes, Tioga Pass Rd"
+  - url: images/chanterelle.jpg
+    image_path: images/chanterelle.jpg
+    title: "Cantharellus californicus, aka huge chanterelle species"
+  - url: images/beefsteak.jpg
+    image_path: images/beefsteak.jpg
+    title: "Fistulina hepatica, the beefsteak mushroom"
 ---
 
 I'm so lucky to live in a place where I can easily day-trip to the sierras and climb on world class rock throughout the year. I truly love to climb and to not have this represented here would completely misclassify who I am. Below you can find a few photos of rock scrambling in CA and beyond.   
 
 {% include gallery caption="" %}
 
-I am also a proud cat mama. I have had Lobster since 2015 and Cricket since October 2019.  
+I am also a proud cat mama. We have had Lobster since 2015 and Cricket since October 2019.  
 
 {% include gallery id="gallery2" caption="" %}
+
+Mushroom hunting is also a big hobby, though I do it less now that I don't live on the coast. 
+
+{% include gallery id="gallery3" caption="" %}

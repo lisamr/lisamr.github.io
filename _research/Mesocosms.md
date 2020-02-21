@@ -9,13 +9,13 @@ header:
 gallery:
   - url: images/mesocosm/sowing_seeds.JPG
     image_path: images/mesocosm/sowing_seeds.JPG
-    alt: "Sowing seeds using a 3D printed hexagonal grid"
+    title: "Sowing seeds using a 3D printed hexagonal grid"
   - url: images/mesocosm/tat1.JPG
     image_path: images/mesocosm/tat1.JPG
-    alt: "Rhizoctonia inoculum"
+    title: "Rhizoctonia inoculum"
   - url: images/mesocosm/mustardsymptoms.JPG
     image_path: images/mesocosm/mustardsymptoms.JPG
-    alt: "Damping off symptoms in mustard"
+    title: "Damping off symptoms in mustard"
 ---
 
 The path towards fully understanding the relationship between host diversity and disease involves identifying the underlying mechanisms. Community composition likely affects disease risk since individual species vary in host competency, the ability to acquire and transmit a pathogen, and abundance. Forecasting how competency and abundance influence the diversity-disease relationship depends on community disassembly, the processes that determine how species are lost from communities.  
