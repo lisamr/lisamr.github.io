@@ -8,7 +8,7 @@ main:
     url: /CV/
   - title: "Fun Stuff"
     url: /funstuff/
-  - title: "Resource Links"
-    url: /external-links/
   - title: "Posts"
     url: /year-archive/
+  - title: "Resource Links"
+    url: /external-links/
