@@ -1,0 +1,1029 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.21.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Survival analysis with Poisson regression - Lisa M. Rosenthal</title>
+<meta name="description" content="Analyzing survival data in a flexible poisson gl(m)m framework.">
+
+
+  <meta name="author" content="Lisa Rosenthal">
+  
+  <meta property="article:author" content="Lisa Rosenthal">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Lisa M. Rosenthal">
+<meta property="og:title" content="Survival analysis with Poisson regression">
+<meta property="og:url" content="http://localhost:4000/Survival_tutorial/">
+
+
+  <meta property="og:description" content="Analyzing survival data in a flexible poisson gl(m)m framework.">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/images/lobster.jpg">
+
+
+
+  <meta name="twitter:site" content="@li_thal1">
+  <meta name="twitter:title" content="Survival analysis with Poisson regression">
+  <meta name="twitter:description" content="Analyzing survival data in a flexible poisson gl(m)m framework.">
+  <meta name="twitter:url" content="http://localhost:4000/Survival_tutorial/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="http://localhost:4000/images/lobster.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2021-02-01T00:00:00-08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Survival_tutorial/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Lisa M. Rosenthal",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Lisa M. Rosenthal Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/images/lobster.jpg" alt=""></a>
+        
+        <a class="site-title" href="/">
+          Home
+          <span class="site-subtitle"></span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/research/">Research</a>
+            </li><li class="masthead__menu-item">
+              <a href="/CV/">CV</a>
+            </li><li class="masthead__menu-item">
+              <a href="/funstuff/">Fun Stuff</a>
+            </li><li class="masthead__menu-item">
+              <a href="/external-links/">Resource Links</a>
+            </li><li class="masthead__menu-item">
+              <a href="/year-archive/">Posts</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Lisa Rosenthal</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>Disease ecology PhD candidate and lover of cats, rocks, and mushrooms</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Sacramento, CA</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:lrosenthal@ucdavis.edu" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Survival analysis with Poisson regression">
+    <meta itemprop="description" content="Analyzing survival data in a flexible poisson gl(m)m framework.">
+    <meta itemprop="datePublished" content="2021-02-01T00:00:00-08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Survival analysis with Poisson regression
+</h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Survival analysis</h4></header>
+              <ul class="toc__menu"><li><a href="#background">Background</a></li><li><a href="#the-data">The data</a><ul><li><a href="#turn-data-into-long-format">Turn data into long format</a></li></ul></li><li><a href="#fit-with-cox-proportional-hazard-model">Fit with cox proportional hazard model</a></li><li><a href="#fit-with-rstanarm">Fit with Rstanarm</a></li><li><a href="#poisson-trick">Poisson trick</a></li><li><a href="#models-in-brms">Models in brms</a></li><li><a href="#compare-models">Compare models</a><ul><li><a href="#first-coeffients-for-the-treatment">First, coeffients for the treatment</a></li><li><a href="#secondly-survivial-curves">Secondly, survivial curves</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>Analyzing survival data in a flexible poisson gl(m)m framework.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#load packages</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">survival</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggfortify</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">rstanarm</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">brms</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidybayes</span><span class="p">)</span><span class="w">
+
+</span><span class="n">theme_set</span><span class="p">(</span><span class="n">theme_classic</span><span class="p">())</span><span class="w"> 
+</span></code></pre></div></div>
+
+<h1 id="background">Background</h1>
+
+<p>I’m working with tree-level data in the Sierra Nevadas centered on root
+disease gap centers. The trees were originally surveyed in the early
+1970s and have been resurveyed every 1-8 years up until post-drought
+from 2012-2016. I’m interested in running a survival analysis in order
+to parse the effects of climate and disease on tree mortality. Since
+basic survival models assume that variables do not change over time, I
+need to employ a workaround that relaxes that assumption–I’d like to
+allow climate, DBH and the effects of disease to vary with time.</p>
+
+<p>There seems to be a billion ways and packages to model time-to-events,
+but one approach is to use a peicewise exponential model, which in
+effect is similar to the cox proportional hazards model. Essentially,
+you cut the survival function into smaller intervals, assume the hazard
+rate is constant within each interval, and independent from the next.
+Read more about that here, starting on page 17:
+<a href="https://data.princeton.edu/wws509/notes/c7.pdf">https://data.princeton.edu/wws509/notes/c7.pdf</a></p>
+
+<p>A poisson regression is equivalent in form and advantageous since one
+can model the mean hazard rate the same way as a poisson generalized
+linear mixed model. The GLMM framework is familiar and affords me the
+ability to add in additional complexity that canned survival analysis
+packages cannot.</p>
+
+<p>Here I’m going to show how the poisson model is equivalent by
+contrasting various models and showing that the coefficients and
+survival predictions are essentially the same. The models I will
+contrast are the following:</p>
+
+<ul>
+  <li>cox proportional hazard (frequentist)</li>
+  <li>bayesian survival model with a M-spline and weibull baseline hazard
+(<code class="language-plaintext highlighter-rouge">Rstanarm</code> survival functions)</li>
+  <li>bayesian poisson trick with and without smoothing term for time
+(<code class="language-plaintext highlighter-rouge">brms</code>)</li>
+</ul>
+
+<p>The last option is the most flexible since you can write a poisson model
+in any program you’d like. I show it in <code class="language-plaintext highlighter-rouge">brms</code> because it’s simple, but
+for increased flexibility, I’ll eventually write the model for my
+project in <code class="language-plaintext highlighter-rouge">Stan</code>.</p>
+
+<h1 id="the-data">The data</h1>
+
+<p>Even though I’m interested in using the poisson model because I want to
+use time-varying covariates, the model can still run fine even when the
+variables remain constant. For simplicity, that’s what I’ll do.</p>
+
+<p>Let’s work with the leukemia dataset from the package <code class="language-plaintext highlighter-rouge">survival</code>.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#leukemia dataset</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="n">leukemia</span><span class="p">,</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"survival"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#add an id column</span><span class="w">
+</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as_tibble</span><span class="p">(</span><span class="n">leukemia</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">seq_len</span><span class="p">(</span><span class="n">n</span><span class="p">()))</span><span class="w"> 
+</span><span class="n">df</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## # A tibble: 23 x 4
+##     time status x             id
+##    &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;      &lt;int&gt;
+##  1     9      1 Maintained     1
+##  2    13      1 Maintained     2
+##  3    13      0 Maintained     3
+##  4    18      1 Maintained     4
+##  5    23      1 Maintained     5
+##  6    28      0 Maintained     6
+##  7    31      1 Maintained     7
+##  8    34      1 Maintained     8
+##  9    45      0 Maintained     9
+## 10    48      1 Maintained    10
+## # … with 13 more rows
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## # A tibble: 2 x 2
+##   x                 n
+##   &lt;fct&gt;         &lt;int&gt;
+## 1 Maintained       11
+## 2 Nonmaintained    12
+</code></pre></div></div>
+
+<p>You can see that some patients have a status of 1, meaning they died at
+the recorded time, while others have a status of 0, meaning they were
+censored at the recorded time. There’s also a covariate x, which is a
+binary indicator split equally among the patients.</p>
+
+<p>Here’s what the data look like:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#quick visualization of the data (Kaplan meier)</span><span class="w">
+</span><span class="n">autoplot</span><span class="p">(</span><span class="n">survfit</span><span class="p">(</span><span class="n">Surv</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="o">~</span><span class="n">x</span><span class="p">,</span><span class="w"> 
+        </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">),</span><span class="w"> </span><span class="n">conf.int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/assets/images/Survival_tutorial_files/figure-gfm/unnamed-chunk-3-1.png" alt="" /><!-- --></p>
+
+<p>By time=48, everyone except for one person is either dead or has left
+the study (censored).</p>
+
+<h2 id="turn-data-into-long-format">Turn data into long format</h2>
+
+<p>Currently the data has 1 row per patient. We want 1 row per
+timepoint-patient. In other words, there will be a row desribing a
+patient’s status for every time interval that they remained in the
+study. After a patient dies or is censored, they are no longer in the
+dataset.</p>
+
+<p>Here, I’ll define the cutpoints by every time there was a death. It’s
+important that each cutpoint has at least one event, otherwise the model
+has a difficult time estimating baseline hazards. Then we can use
+<code class="language-plaintext highlighter-rouge">survSplit</code> to aid with making the data long.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#choose cut points</span><span class="w">
+</span><span class="c1">#events only + the last one. </span><span class="w">
+</span><span class="n">lasttime</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">df</span><span class="o">$</span><span class="n">time</span><span class="p">)</span><span class="w"> 
+</span><span class="n">events</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">pull</span><span class="p">(</span><span class="n">time</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">unique</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">sort</span><span class="w">
+</span><span class="n">cut_events</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">events</span><span class="p">,</span><span class="w"> </span><span class="n">lasttime</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#make long. Want time start/stop, duration, status, covariates. </span><span class="w">
+</span><span class="n">df_long</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">survSplit</span><span class="p">(</span><span class="w">
+    </span><span class="n">formula</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Surv</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">.</span><span class="p">,</span><span class="w"> 
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">,</span><span class="w"> 
+    </span><span class="n">cut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cut_events</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">rename</span><span class="p">(</span><span class="n">tstop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">tduration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tstop</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">tstart</span><span class="p">)</span><span class="w">
+
+</span><span class="n">head</span><span class="p">(</span><span class="n">df_long</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>##            x id tstart tstop status tduration
+## 1 Maintained  1      0     5      0         5
+## 2 Maintained  1      5     8      0         3
+## 3 Maintained  1      8     9      1         1
+## 4 Maintained  2      0     5      0         5
+## 5 Maintained  2      5     8      0         3
+## 6 Maintained  2      8     9      0         1
+</code></pre></div></div>
+
+<h1 id="fit-with-cox-proportional-hazard-model">Fit with cox proportional hazard model</h1>
+
+<p>This is the most basic fit. It’s useful to get an idea of what the
+covariate estimates should be. The output is identical regardless of
+whether the data is ‘short’ or long.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fit_cox_short</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coxph</span><span class="p">(</span><span class="n">Surv</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="o">~</span><span class="n">x</span><span class="p">,</span><span class="w"> 
+        </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span><span class="w">
+</span><span class="n">fit_cox_short</span><span class="w"> </span><span class="c1">#x = 0.92, se=.51</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## Call:
+## coxph(formula = Surv(time, status) ~ x, data = df)
+## 
+##                  coef exp(coef) se(coef)     z      p
+## xNonmaintained 0.9155    2.4981   0.5119 1.788 0.0737
+## 
+## Likelihood ratio test=3.38  on 1 df, p=0.06581
+## n= 23, number of events= 18
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fit_cox_long</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coxph</span><span class="p">(</span><span class="n">Surv</span><span class="p">(</span><span class="n">tstart</span><span class="p">,</span><span class="w"> </span><span class="n">tstop</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="o">~</span><span class="n">x</span><span class="p">,</span><span class="w"> 
+        </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df_long</span><span class="p">)</span><span class="w">
+</span><span class="n">fit_cox_long</span><span class="w"> </span><span class="c1">#x = 0.92, se=.51</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## Call:
+## coxph(formula = Surv(tstart, tstop, status) ~ x, data = df_long)
+## 
+##                  coef exp(coef) se(coef)     z      p
+## xNonmaintained 0.9155    2.4981   0.5119 1.788 0.0737
+## 
+## Likelihood ratio test=3.38  on 1 df, p=0.06581
+## n= 180, number of events= 18
+</code></pre></div></div>
+
+<h1 id="fit-with-rstanarm">Fit with <code class="language-plaintext highlighter-rouge">Rstanarm</code></h1>
+
+<p>Rstanarm recently came out with new features to model survival data. As
+of writing this, the functions haven’t been released on CRAN yet but you
+can download them in the development version from github:<br />
+<code class="language-plaintext highlighter-rouge">remotes::install_github("stan-dev/rstanarm@feature/survival")</code><br />
+You can learn more here: <a href="https://arxiv.org/pdf/2002.09633.pdf">https://arxiv.org/pdf/2002.09633.pdf</a></p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#M-splines (default with default wiggliness arguments)</span><span class="w">
+</span><span class="n">fit_RSA_ms</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">stan_surv</span><span class="p">(</span><span class="w">
+  </span><span class="n">Surv</span><span class="p">(</span><span class="n">tstart</span><span class="p">,</span><span class="w"> </span><span class="n">tstop</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="o">~</span><span class="n">x</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">basehaz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'ms'</span><span class="p">,</span><span class="w">
+  </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df_long</span><span class="p">,</span><span class="w">
+  </span><span class="n">chains</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">cores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2000</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">summary</span><span class="p">(</span><span class="n">fit_RSA_ms</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1">#x = .89 (.28, 1.53)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## 
+## Model Info:
+## 
+##  function:        stan_surv
+##  baseline hazard: M-splines on hazard scale
+##  formula:         Surv(tstart, tstop, status) ~ x
+##  algorithm:       sampling
+##  sample:          3000 (posterior sample size)
+##  priors:          see help('prior_summary')
+##  observations:    180
+##  events:          18 (10%)
+##  right censored:  162 (90%)
+##  delayed entry:   yes
+## 
+## Estimates:
+##                   mean   sd   10%   50%   90%
+## (Intercept)     0.76   0.43 0.21  0.77  1.31 
+## xNonmaintained  0.87   0.50 0.23  0.85  1.51 
+## m-splines-coef1 0.02   0.02 0.00  0.01  0.04 
+## m-splines-coef2 0.06   0.05 0.01  0.05  0.12 
+## m-splines-coef3 0.40   0.19 0.15  0.41  0.65 
+## m-splines-coef4 0.27   0.19 0.04  0.25  0.55 
+## m-splines-coef5 0.13   0.11 0.02  0.10  0.29 
+## m-splines-coef6 0.12   0.10 0.01  0.09  0.26 
+## 
+## MCMC diagnostics
+##                 mcse Rhat n_eff
+## (Intercept)     0.01 1.00 2289 
+## xNonmaintained  0.01 1.00 2631 
+## m-splines-coef1 0.00 1.00 3256 
+## m-splines-coef2 0.00 1.00 2721 
+## m-splines-coef3 0.00 1.00 2256 
+## m-splines-coef4 0.00 1.00 2111 
+## m-splines-coef5 0.00 1.00 2782 
+## m-splines-coef6 0.00 1.00 3343 
+## log-posterior   0.06 1.00 1061 
+## 
+## For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#weibull (a little more familiar, but won't be as similar to coxph)</span><span class="w">
+</span><span class="n">fit_RSA_w</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">update</span><span class="p">(</span><span class="n">fit_RSA_ms</span><span class="p">,</span><span class="w"> </span><span class="n">basehaz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'weibull'</span><span class="p">)</span><span class="w">
+</span><span class="n">summary</span><span class="p">(</span><span class="n">fit_RSA_w</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1">#x = 1.14 (.49, 1.81)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## 
+## Model Info:
+## 
+##  function:        stan_surv
+##  baseline hazard: weibull
+##  formula:         Surv(tstart, tstop, status) ~ x
+##  algorithm:       sampling
+##  sample:          3000 (posterior sample size)
+##  priors:          see help('prior_summary')
+##  observations:    180
+##  events:          18 (10%)
+##  right censored:  162 (90%)
+##  delayed entry:   yes
+## 
+## Estimates:
+##                  mean   sd    10%   50%   90%
+## (Intercept)    -5.28   1.06 -6.61 -5.18 -4.03
+## xNonmaintained  1.20   0.56  0.52  1.17  1.92
+## weibull-shape   1.26   0.23  0.99  1.25  1.55
+## 
+## MCMC diagnostics
+##                mcse Rhat n_eff
+## (Intercept)    0.04 1.00  878 
+## xNonmaintained 0.02 1.00 1033 
+## weibull-shape  0.01 1.00  985 
+## log-posterior  0.06 1.00  541 
+## 
+## For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#can easily plot baseline hazard rate</span><span class="w">
+</span><span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">plot</span><span class="p">(</span><span class="n">fit_RSA_ms</span><span class="p">)</span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'M-splines baseline haz'</span><span class="p">)</span><span class="w">
+</span><span class="n">p2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">plot</span><span class="p">(</span><span class="n">fit_RSA_w</span><span class="p">)</span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Weibull baseline haz'</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#also survival posteriors</span><span class="w">
+</span><span class="n">ps_ms</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">posterior_survfit</span><span class="p">(</span><span class="n">fit_RSA_ms</span><span class="p">,</span><span class="w"> 
+                  </span><span class="n">newdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="w">
+                    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'Maintained'</span><span class="p">,</span><span class="w"> </span><span class="s1">'Nonmaintained'</span><span class="p">)),</span><span class="w">
+                  </span><span class="n">times</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'Maintained'</span><span class="p">,</span><span class="w"> </span><span class="s1">'Nonmaintained'</span><span class="p">))</span><span class="w">
+</span><span class="n">ps_w</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">posterior_survfit</span><span class="p">(</span><span class="n">fit_RSA_w</span><span class="p">,</span><span class="w"> 
+                  </span><span class="n">newdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="w">
+                    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'Maintained'</span><span class="p">,</span><span class="w"> </span><span class="s1">'Nonmaintained'</span><span class="p">)),</span><span class="w">
+                  </span><span class="n">times</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'Maintained'</span><span class="p">,</span><span class="w"> </span><span class="s1">'Nonmaintained'</span><span class="p">))</span><span class="w">
+
+</span><span class="n">p3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">(</span><span class="n">ps_ms</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">median</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_ribbon</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">ymin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ci_lb</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ci_ub</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'none'</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'M-splines Survival'</span><span class="p">)</span><span class="w">
+</span><span class="n">p4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">(</span><span class="n">ps_w</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">median</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_ribbon</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">ymin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ci_lb</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ci_ub</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'bottom'</span><span class="p">)</span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Weibull Survival'</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#plot all together</span><span class="w">
+</span><span class="n">p5</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cowplot</span><span class="o">::</span><span class="n">plot_grid</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">,</span><span class="n">p3</span><span class="p">,</span><span class="n">p4</span><span class="w"> </span><span class="o">+</span><span class="n">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'none'</span><span class="p">))</span><span class="w">
+</span><span class="n">cowplot</span><span class="o">::</span><span class="n">plot_grid</span><span class="p">(</span><span class="n">p5</span><span class="p">,</span><span class="w"> </span><span class="n">cowplot</span><span class="o">::</span><span class="n">get_legend</span><span class="p">(</span><span class="n">p4</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">rel_heights</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">.9</span><span class="p">,</span><span class="w"> </span><span class="m">.1</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/assets/images/Survival_tutorial_files/figure-gfm/unnamed-chunk-6-1.png" alt="" /><!-- --></p>
+
+<p>The estimate of the treatment coefficient in the M-splines model was
+closer to the cox PH model from before because it’s more flexible than
+the weibull baseline hazard rate.</p>
+
+<p>Clearly this looks like an awesome new set of features, complete with
+really easy functions to plot the posterior predictions. It’s still a
+bit too rigid for my needs though since in my project, I’d like to allow
+the effect of disease to decay in space and time. If you just have
+linear effects, this seems like a really promising tool!</p>
+
+<h1 id="poisson-trick">Poisson trick</h1>
+
+<p>Here we’ll use a peicewise exponential model and approximate it with a
+poisson model. Within each time interval (j), the hazard for
+individual (i) is defined
+as</p>
+
+<p>[\lambda_{ij} = \lambda_{j} \space \text{exp} (x^T_i \boldsymbol\beta)]</p>
+
+<p>Through some mathematical rearrangement, the hazard can be modeled with
+a poisson regression. I can’t do the explanation justice, so I’ll just
+refer readers to this <a href="https://data.princeton.edu/wws509/notes/c7s4">link
+here</a>. The status of each
+individual is modeled with a poisson likelihood and the general equation
+of the mean is</p>
+
+<p>[\mu_{ij} = t_{ij}\lambda_{ij} ]</p>
+
+<p>where (t_{ij}) is the exposure time and (\lambda_{ij}) is the hazard
+rate for individual (i) in interval (j). By logging both sides, we
+find a familiar poisson equation:</p>
+
+<p>[
+log(\mu_{ij}) = log(t_{ij}) + \alpha_{j} + x^T_i \boldsymbol\beta 
+]</p>
+
+<p>where (log(t_{ij})) acts as an offset to control for variation in time
+interval durations, (\alpha_{j} = log(\lambda_{j})) is the baseline
+hazard, and (x^T_i \boldsymbol\beta) is where you estimate your
+covariates. Even though we’re following the same individuals through
+time, we don’t need an individual-level random intercept because we’re
+computing each hazard independently. From here, the model can be as
+complex as you can make any GLMM!</p>
+
+<h1 id="models-in-brms">Models in <code class="language-plaintext highlighter-rouge">brms</code></h1>
+
+<p>Traditionally (\alpha_j) is treated as a factor since it’s the
+intercept for each time interval. You can also use a spline smoother to
+estimate the baseline hazard as a continuous function. I’ll demostrate
+both below.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#a_j is a factor</span><span class="w">
+</span><span class="n">fit_BRM_factor</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">brm</span><span class="p">(</span><span class="w">
+  </span><span class="n">formula</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">as.factor</span><span class="p">(</span><span class="n">tstop</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">offset</span><span class="p">(</span><span class="nf">log</span><span class="p">(</span><span class="n">tduration</span><span class="p">)),</span><span class="w">
+  </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">poisson</span><span class="p">(),</span><span class="w">
+  </span><span class="n">prior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">set_prior</span><span class="p">(</span><span class="s1">'normal(0, 4)'</span><span class="p">,</span><span class="w"> </span><span class="n">class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'b'</span><span class="p">),</span><span class="w"> 
+  </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df_long</span><span class="p">,</span><span class="w"> </span><span class="n">chains</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">cores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2000</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#a_j is a smooth function that changes over time</span><span class="w">
+</span><span class="c1">#number of knots will be length of cutpoints</span><span class="w">
+</span><span class="n">fit_BRM_spline</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">brm</span><span class="p">(</span><span class="w">
+  </span><span class="n">formula</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">s</span><span class="p">(</span><span class="n">tstop</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">cut_events</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">offset</span><span class="p">(</span><span class="nf">log</span><span class="p">(</span><span class="n">tduration</span><span class="p">)),</span><span class="w">
+  </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">poisson</span><span class="p">(),</span><span class="w">
+  </span><span class="n">prior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">set_prior</span><span class="p">(</span><span class="s1">'normal(0, 4)'</span><span class="p">,</span><span class="w"> </span><span class="n">class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'b'</span><span class="p">),</span><span class="w"> 
+  </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df_long</span><span class="p">,</span><span class="w"> </span><span class="n">chains</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">cores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2000</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#increasing delta due to divergent transitions, which kinda helps, but still quite a few DTs. Rhats and neff good, so it converged ok.</span><span class="w">
+</span><span class="n">fit_BRM_spline</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">update</span><span class="p">(</span><span class="n">fit_BRM_spline</span><span class="p">,</span><span class="w"> </span><span class="n">control</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">adapt_delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.99</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Let’s now plot the baseline hazard rate for both of these models. It
+seems like one advantage to applying a smoothing spline for each time
+interval is so that you can have a continuous hazard rate.</p>
+
+<p>The intercepts represent the log-baseline hazard. We need to get the
+posterior predictions and exponentiate them to get them on the correct
+scale.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#baseline hazard, time = factor</span><span class="w">
+</span><span class="n">haz_timefactor</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tidy_draws</span><span class="p">(</span><span class="n">fit_BRM_factor</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">select</span><span class="p">(</span><span class="n">b_Intercept</span><span class="o">:</span><span class="n">b_as.factortstop161</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate_at</span><span class="p">(</span><span class="n">vars</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="s1">'as.factor'</span><span class="p">)),</span><span class="w"> </span><span class="n">.funs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">.</span><span class="o">$</span><span class="n">b_Intercept</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">draw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">seq_len</span><span class="p">(</span><span class="n">n</span><span class="p">()))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">rename</span><span class="p">(</span><span class="n">b_as.factortstop5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b_Intercept</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">pivot_longer</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="s1">'b_as.factor'</span><span class="p">),</span><span class="w"> </span><span class="n">names_prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'b_as.factortstop'</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.integer</span><span class="p">(</span><span class="n">name</span><span class="p">))</span><span class="w">
+
+</span><span class="c1">#plot for time = factor</span><span class="w">
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">haz_timefactor</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">as.factor</span><span class="p">(</span><span class="n">time</span><span class="p">),</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_jitter</span><span class="p">(</span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.1</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.01</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1">#geom_boxplot() +</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">axis.text.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">90</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Hazard for time = factor'</span><span class="p">,</span><span class="w">
+       </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'time interval (j)'</span><span class="p">,</span><span class="w"> 
+       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="s1">'baseline hazard ('</span><span class="p">,</span><span class="w"> </span><span class="n">lambda</span><span class="p">[</span><span class="s1">'j'</span><span class="p">],</span><span class="w"> </span><span class="s1">')'</span><span class="p">)</span><span class="w"> </span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/assets/images/Survival_tutorial_files/figure-gfm/unnamed-chunk-8-1.png" alt="" /><!-- --></p>
+
+<p>I’ll do the same for the smoothed time function. For some reason
+knitting with Rmarkdown renders something incorrect, but it works when I
+run it unknitted. I don’t show the figures, but the code should work.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#do for time = spline function</span><span class="w">
+</span><span class="c1">#predict to new data. Just want the intercept, so x = Maintained, which the model treated as 0 (dummy variable).</span><span class="w">
+</span><span class="n">newdat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">expand_grid</span><span class="p">(</span><span class="n">tstop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="o">:</span><span class="n">lasttime</span><span class="p">,</span><span class="w"> </span><span class="n">tduration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w">
+  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'Maintained'</span><span class="p">))</span><span class="w">
+</span><span class="n">postmu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fitted_draws</span><span class="p">(</span><span class="n">fit_BRM_spline</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newdat</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'linear'</span><span class="p">)</span><span class="w"> </span><span class="c1">#values are log baseline hazard</span><span class="w">
+
+</span><span class="c1">#estimate median hazard</span><span class="w">
+</span><span class="n">median_haz</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">postmu</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">tstop</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">summarise</span><span class="p">(</span><span class="n">median_haz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="nf">exp</span><span class="p">(</span><span class="n">.value</span><span class="p">)))</span><span class="w">
+
+</span><span class="c1">#plot hazard for the first 200 draws</span><span class="w">
+</span><span class="n">postmu</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">.draw</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">200</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">.</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">tstop</span><span class="p">,</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="n">.value</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_line</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.1</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.draw</span><span class="p">))</span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_line</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">median_haz</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">tstop</span><span class="p">,</span><span class="w"> </span><span class="n">median_haz</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'maroon'</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_y_continuous</span><span class="p">(</span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1.5</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Hazard for time = spline'</span><span class="p">,</span><span class="w">
+       </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'time interval (j)'</span><span class="p">,</span><span class="w"> 
+       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="s1">'baseline hazard ('</span><span class="p">,</span><span class="w"> </span><span class="n">lambda</span><span class="p">[</span><span class="s1">'j'</span><span class="p">],</span><span class="w"> </span><span class="s1">')'</span><span class="p">)</span><span class="w"> </span><span class="p">))</span><span class="w">  
+</span></code></pre></div></div>
+
+<p>It looks like the model is really unsure about the hazard rate after
+time=50. There’s no event after this time point, so that’s probably why
+it’s unsure? Let’s plot pre time=50 to see if its similar the one where
+time is a factor.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#time=spline, time &lt; 50</span><span class="w">
+</span><span class="n">postmu</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">.draw</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">200</span><span class="p">,</span><span class="w"> </span><span class="n">tstop</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">50</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">.</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">tstop</span><span class="p">,</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="n">.value</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_line</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.1</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.draw</span><span class="p">))</span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_line</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">median_haz</span><span class="p">,</span><span class="w"> </span><span class="n">tstop</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">50</span><span class="p">),</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">tstop</span><span class="p">,</span><span class="w"> </span><span class="n">median_haz</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'maroon'</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Hazard for time = spline, time &lt; 50'</span><span class="p">,</span><span class="w">
+       </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'time interval (j)'</span><span class="p">,</span><span class="w"> 
+       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="s1">'baseline hazard ('</span><span class="p">,</span><span class="w"> </span><span class="n">lambda</span><span class="p">[</span><span class="s1">'j'</span><span class="p">],</span><span class="w"> </span><span class="s1">')'</span><span class="p">)</span><span class="w"> </span><span class="p">))</span><span class="w">  
+</span></code></pre></div></div>
+
+<p>I’m not convinced that it’s worth smoothing out the baseline hazard.
+Already has sampling issues with such a simple dataset and coding in
+splines is yet another obstacle if I wanted to write this model in Stan.</p>
+
+<h1 id="compare-models">Compare models</h1>
+
+<p>The data has now been fit using 3 different packages, each with slightly
+different assumptions. Let’s compare the coeffients for the treatment,
+baseline hazards, and the survival curves.</p>
+
+<h2 id="first-coeffients-for-the-treatment">First, coeffients for the treatment</h2>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#extract estimates mean and 90% CI</span><span class="w">
+</span><span class="n">CIs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">confint</span><span class="p">(</span><span class="n">fit_cox_long</span><span class="p">,</span><span class="w"> </span><span class="n">parm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'xNonmaintained'</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.9</span><span class="p">)</span><span class="w">
+</span><span class="n">x_coxph</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coef</span><span class="p">(</span><span class="n">fit_cox_long</span><span class="p">),</span><span class="w"> 
+                      </span><span class="n">lower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CIs</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">upper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CIs</span><span class="p">[</span><span class="m">2</span><span class="p">])</span><span class="w"> 
+
+</span><span class="c1">#get posteriors for the rstanarm and brms models</span><span class="w">
+</span><span class="n">mods</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">fit_RSA_ms</span><span class="p">,</span><span class="w"> </span><span class="n">fit_RSA_w</span><span class="p">,</span><span class="w"> </span><span class="n">fit_BRM_factor</span><span class="p">,</span><span class="w"> </span><span class="n">fit_BRM_spline</span><span class="p">)</span><span class="w">
+</span><span class="n">posts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">mods</span><span class="p">,</span><span class="w"> </span><span class="n">tidy_draws</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#extract treatment coef</span><span class="w">
+</span><span class="n">f_coef</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">post</span><span class="p">){</span><span class="w">
+  </span><span class="n">whichcol</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">grep</span><span class="p">(</span><span class="s1">'maintained'</span><span class="p">,</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">post</span><span class="p">))</span><span class="w">
+  </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pull</span><span class="p">(</span><span class="n">post</span><span class="p">[,</span><span class="n">whichcol</span><span class="p">])</span><span class="w">
+  </span><span class="n">data.frame</span><span class="p">(</span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">lower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hdci</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.9</span><span class="p">)[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">upper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hdci</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.9</span><span class="p">)[</span><span class="m">2</span><span class="p">])</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">trt_coefs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">posts</span><span class="p">,</span><span class="w"> </span><span class="n">f_coef</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">bind_rows</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">bind_rows</span><span class="p">(</span><span class="n">x_coxph</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'rstanarm m-splines'</span><span class="p">,</span><span class="w"> </span><span class="s1">'rstanarm weibull'</span><span class="p">,</span><span class="w"> </span><span class="s1">'brms time factor'</span><span class="p">,</span><span class="w"> </span><span class="s1">'brms time spline'</span><span class="p">,</span><span class="w"> </span><span class="s1">'coxph'</span><span class="p">))</span><span class="w">
+  
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">trt_coefs</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_pointrange</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">xmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lower</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">upper</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">scale_x_continuous</span><span class="p">(</span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">2.1</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'treatment coef'</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## Warning: Removed 1 rows containing missing values (geom_segment).
+</code></pre></div></div>
+
+<p><img src="/assets/images/Survival_tutorial_files/figure-gfm/unnamed-chunk-11-1.png" alt="" /><!-- --></p>
+
+<p>All the estimates are pretty similar. That’s reasurring.</p>
+
+<h2 id="secondly-survivial-curves">Secondly, survivial curves</h2>
+
+<p>Let’s look at the survival curve predictions against observed data. As
+of now I can’t get posterior predictions with the rstanarm models with
+<code class="language-plaintext highlighter-rouge">tidybayes</code> (major mark against these features until that’s worked out),
+so I’ll rely on the built-in plotting functions. I will estimate the
+survival probabilities for the poisson models.</p>
+
+<p>The output of the posterior is the log-hazard rate. The survival
+function is directly related to the hazard rate:</p>
+
+<p>[S(t) = \text{exp}(-\int^t_0 \lambda(z)dz)] Since our chunks of time
+are discrete, we add up the cumulative hazards, correct for the exposure
+time (time between intervals, i.e. the offset), and take the negative
+exponential:</p>
+
+<p>[ S(t|x)= \text{exp}(-\sum_j \text{exp}(\alpha_j + log(t_{j}) + \beta x)) ]
+<code class="language-plaintext highlighter-rouge">tidybayes::fitted_draws()</code> makes this easy by predicting the mean
+posterior to new data and already takes into account the exposure time
+and covariates.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#generate curve for observed data using Kaplan-Meier</span><span class="w">
+</span><span class="n">surv_obs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fortify</span><span class="p">(</span><span class="n">survfit</span><span class="p">(</span><span class="n">Surv</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="o">~</span><span class="n">x</span><span class="p">,</span><span class="w"> 
+                            </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">select</span><span class="p">(</span><span class="n">tstart</span><span class="o">=</span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">surv</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strata</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">add_case</span><span class="p">(</span><span class="n">tstart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">surv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'Maintained'</span><span class="p">,</span><span class="w"> </span><span class="s1">'Nonmaintained'</span><span class="p">))</span><span class="w">
+
+
+</span><span class="c1">#get posterior predictions from the brms models for both treatments. </span><span class="w">
+
+</span><span class="c1">#need to define new dataframe to predict to.</span><span class="w">
+</span><span class="n">newdat_factor</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="w">
+  </span><span class="n">tstart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unique</span><span class="p">(</span><span class="n">df_long</span><span class="o">$</span><span class="n">tstart</span><span class="p">),</span><span class="w">
+  </span><span class="n">tduration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">diff</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">cut_events</span><span class="p">))</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">expand_grid</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'Maintained'</span><span class="p">,</span><span class="w"> </span><span class="s1">'Nonmaintained'</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">tstop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tstart</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tduration</span><span class="p">)</span><span class="w">
+</span><span class="n">newdat_spline</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">expand_grid</span><span class="p">(</span><span class="n">tstop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="o">:</span><span class="n">lasttime</span><span class="p">,</span><span class="w"> </span><span class="n">tduration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w">
+  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'Maintained'</span><span class="p">,</span><span class="w"> </span><span class="s1">'Nonmaintained'</span><span class="p">))</span><span class="w">
+
+
+</span><span class="c1">#predict posterior means. automatically adds in the offset when it predicts the posterior. </span><span class="w">
+</span><span class="n">PP_factor</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fitted_draws</span><span class="p">(</span><span class="n">fit_BRM_factor</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newdat_factor</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'linear'</span><span class="p">)</span><span class="w"> 
+
+
+</span><span class="c1">#put posterior into nice dataframe for plotting</span><span class="w">
+</span><span class="c1">#factor</span><span class="w">
+</span><span class="n">surv_factor</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">PP_factor</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="c1">#filter(.draw == 1, x=='Maintained') %&gt;% </span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">.chain</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">.iteration</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">.draw</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">S</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="o">-</span><span class="nf">cumsum</span><span class="p">(</span><span class="nf">exp</span><span class="p">(</span><span class="n">.value</span><span class="p">))))</span><span class="w"> 
+</span><span class="n">surv_factor_mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">surv_factor</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">tstop</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">summarise</span><span class="p">(</span><span class="n">S</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">S</span><span class="p">))</span><span class="w">
+
+</span><span class="c1">#spline predictions. I'm commenting this out since it doesn't knit properly.</span><span class="w">
+</span><span class="c1">#PP_spline &lt;- fitted_draws(fit_BRM_spline, newdata = newdat_spline, scale = 'linear') </span><span class="w">
+</span><span class="c1">#surv_spline &lt;- PP_spline %&gt;% </span><span class="w">
+</span><span class="c1">#  group_by(.draw, x) %&gt;% </span><span class="w">
+</span><span class="c1">#  mutate(S = exp(-cumsum(exp(.value)))) %&gt;% </span><span class="w">
+</span><span class="c1">#  select(-.chain, -.iteration)</span><span class="w">
+</span><span class="c1">#surv_spline_mean &lt;- surv_spline %&gt;% </span><span class="w">
+</span><span class="c1">#  group_by(x, tstop) %&gt;% </span><span class="w">
+</span><span class="c1">#  summarise(S = mean(S))</span><span class="w">
+
+
+
+</span><span class="c1">#plot survival curves</span><span class="w">
+</span><span class="n">p_surv_brms_factor</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">(</span><span class="n">filter</span><span class="p">(</span><span class="n">surv_factor</span><span class="p">,</span><span class="w"> </span><span class="n">.draw</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">1000</span><span class="p">),</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">tstop</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_jitter</span><span class="p">(</span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.1</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.01</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_line</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">surv_factor_mean</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">tstop</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">))</span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_line</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">surv_obs</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">tstart</span><span class="p">,</span><span class="w"> </span><span class="n">surv</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.7</span><span class="p">)</span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Time'</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Probability of survival'</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Poisson, time = factor'</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">''</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'bottom'</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#p_surv_brms_spline &lt;- ggplot(filter(surv_spline, .draw %in% 1:100), aes(tstop, S)) +</span><span class="w">
+</span><span class="c1">#  geom_line(alpha = .1, aes( group = interaction(.draw, x), color = x)) +</span><span class="w">
+</span><span class="c1">#  geom_line(data = surv_spline_mean, aes(tstop, S, color = x))+</span><span class="w">
+</span><span class="c1">#  geom_line(data = surv_obs, aes(tstart, surv, group = x))+</span><span class="w">
+</span><span class="c1">#  labs(x = 'Time', y = 'Probability of survival',title = 'Poisson, time = spline', color = '') +</span><span class="w">
+</span><span class="c1">#  theme(legend.position = 'bottom')</span><span class="w">
+
+</span><span class="n">p_surv_RSA_ms</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">geom_line</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">surv_obs</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">tstart</span><span class="p">,</span><span class="w"> </span><span class="n">surv</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Time'</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Probability of survival'</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">''</span><span class="p">)</span><span class="w"> 
+</span><span class="n">p_surv_RSA_w</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">geom_line</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">surv_obs</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">tstart</span><span class="p">,</span><span class="w"> </span><span class="n">surv</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Time'</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Probability of survival'</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">''</span><span class="p">)</span><span class="w">  </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'none'</span><span class="p">)</span><span class="w">
+
+</span><span class="n">p_grid1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cowplot</span><span class="o">::</span><span class="n">plot_grid</span><span class="p">(</span><span class="n">p_surv_brms_factor</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'none'</span><span class="p">),</span><span class="w"> 
+                              </span><span class="c1">#p_surv_brms_spline + theme(legend.position = 'none'), </span><span class="w">
+                              </span><span class="n">p_surv_RSA_ms</span><span class="p">,</span><span class="w"> </span><span class="n">p_surv_RSA_w</span><span class="p">)</span><span class="w">
+</span><span class="n">cowplot</span><span class="o">::</span><span class="n">plot_grid</span><span class="p">(</span><span class="n">p_grid1</span><span class="p">,</span><span class="w"> </span><span class="n">cowplot</span><span class="o">::</span><span class="n">get_legend</span><span class="p">(</span><span class="n">p_surv_brms_factor</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">rel_heights</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">.9</span><span class="p">,</span><span class="w"> </span><span class="m">.1</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/assets/images/Survival_tutorial_files/figure-gfm/unnamed-chunk-12-1.png" alt="" /><!-- --></p>
+
+<p>There you have it–3 different survival curves. (The poisson time as
+spline function produces a nice fitting survival curve too, but
+Rmarkdown is being buggy.) They all look like pretty good fits to the
+observed data (in black) and the weibull baseline function seems the
+worst. There are ways to make a smooth function of the upper left plot,
+but I didn’t feel like figuring it out. You can compare the models with
+<code class="language-plaintext highlighter-rouge">loo</code>, but beware that the function assumes each row of data is a new
+observation. It’s better aggregate the log-likehoods by subject so you
+leave one subject out instead of leaving one row out at a time.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-02-01T00:00:00-08:00">February 1, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=li_thal1&text=Survival+analysis+with+Poisson+regression%20http%3A%2F%2Flocalhost%3A4000%2FSurvival_tutorial%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FSurvival_tutorial%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2FSurvival_tutorial%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+            
+      </div>
+    </div>
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+          <li><a href="https://github.com/lisamr" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="mailto:lrosenthal@ucdavis.edu" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 Lisa M. Rosenthal. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -22,6 +22,8 @@ Sudden oak death (SOD) is a prominent forest disease, caused by the generalist i
 
 We use a network of long-term monitoring plots located in the Big Sur region to identify the top 10 most common plant species in both redwood and mixed evergreen forests. Leaf tissue from each species was inoculated in a controlled laboratory environment and assessed for production of its two spore types, sporangia and chlamydospores, the infectious and resistant propagules, respectively. Our results showed that once challenged by *P. ramorum*, almost all plant species were infected and produced spores to some extent. We found sporangia production was greatest in tanoak and bay laurel and the difference was insignificant, and even though other species produced much less, quantities were non-zero. Thus, additional species may play a previously unrecognized role in local transmission. 
 
-Overall, we achieved an empirical foundation to better understand how community composition affects transmission. These findings will help me examine mechanisms of the diversity-disease relationship in a forest disease system. Stay tuned for the next chapter!
+Overall, we achieved an empirical foundation to better understand how community composition affects transmission. These findings will help me examine mechanisms of the diversity-disease relationship in a forest disease system. Stay tuned for the next chapter!  
+
+This is an update.
 
 {% include gallery caption="Some photos of plant collections, inoculations and infective sporangia." %}

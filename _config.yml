@@ -268,12 +268,17 @@ compress_html:
 
 #configuring collections
 collections:
+  docs:
+    output: true
+    permalink: /:collection/:path/
   funstuff:
     output: true
     permalink: /:collection/:path/
   research:
     output: true
     permalink: /:collection/:path/
+
+
     
 # Defaults
 defaults:
