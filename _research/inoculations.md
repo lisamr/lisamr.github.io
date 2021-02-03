@@ -22,6 +22,6 @@ We use a network of long-term sudden oak death monitoring plots located in the B
 
 Overall, we achieved an empirical foundation to better understand how community composition affects transmission. These findings will help me examine mechanisms of the diversity-disease relationship in a forest disease system. Stay tuned for the next chapter!  
 
-Also, check out the [publication in *Plant Disease*!] (https://doi.org/10.1094/PDIS-03-20-0485-RE)  
+**Also, check out the [publication in *Plant Disease*!](https://doi.org/10.1094/PDIS-03-20-0485-RE)**  
 
 {% include gallery caption="Some photos of plant collections, inoculations and infective sporangia." %}
